@@ -1,0 +1,7 @@
+{
+  "Name": "App1",
+  "Libreries": "Microsoft.Extension.DependencyInjection",
+  "Object": "Explanation of dependency injection by building a simple console app with a unit test and then refactoring it with dependency injection. This tutorial uses .NET Core and the Microsoft.Extensions.DependencyInjection Library",
+  "Link": "https://www.youtube.com/watch?v=2rv-lcqW1tM",
+  "Wiki": "https://en.wikipedia.org/wiki/Dependency_inversion_principle"
+}
