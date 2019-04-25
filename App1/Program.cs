@@ -30,6 +30,7 @@ namespace App1
                             throw new Exception("Invalid payment method");
                         }
                         orderManager.Submit(productEnum, paymentMethod.Split(";")[0], paymentMethod.Split(";")[1]);
+                        Console.WriteLine($"{productEnum.ToString()} has been shipped");
                     }
                     else
                     {

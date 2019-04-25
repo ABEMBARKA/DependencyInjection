@@ -5,7 +5,7 @@
 
     public class ProductStockRepository
     {
-        public static Dictionary<Product, int> ProductStockDatabase;
+        public static Dictionary<Product, int> ProductStockDatabase=Seed();
 
         private static  Dictionary<Product,int> Seed()
         {
