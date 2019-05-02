@@ -2,7 +2,11 @@
 {
     using System;
 
-    public class PaymentProcessor
+    public interface IPaymentProcessor
+    {
+        void ChargeCreditCard(string creditCardNumber, string expiryDate);
+    }
+    public class PaymentProcessor:IPaymentProcessor
     {
         public void ChargeCreditCard(string creditCardNumber, string expiryDate)
         {

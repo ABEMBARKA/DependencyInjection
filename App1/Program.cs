@@ -2,14 +2,17 @@
 
 namespace App1
 {
+    using System.ComponentModel.Design;
+    using Microsoft.Extensions.DependencyInjection;
     using Models;
 
     class Program
     {
+        public static readonly IServiceProvider Container=new ContainerBuilder().Build();
         static void Main(string[] args)
         {
             var product = string.Empty;
-            var orderManager = new OrderManager();
+            var orderManager = Container.GetService<IOrdenManager>();
             while (product != "exit")
             {
                 Console.Write(@"Enter a Product:

@@ -3,21 +3,33 @@
     using System;
     using Models;
 
-    public class OrderManager
+    public interface IOrdenManager
     {
+         void Submit(Product product, string creditCardNumber, string expiryDate);
+    }
+    public class OrderManager:IOrdenManager
+    {
+        private readonly IShippingProcessor _shippingProcessor;
+        private readonly IProductStockRepository _productStockRepository;
+        private IPaymentProcessor _paymentProcessor;
+
+        public OrderManager(IShippingProcessor shippingProcessor, IProductStockRepository productStockRepository, IPaymentProcessor paymentProcessor)
+        {
+            _shippingProcessor = shippingProcessor;
+            _productStockRepository = productStockRepository;
+            _paymentProcessor = paymentProcessor;
+        }
+
         public void Submit(Product product, string creditCardNumber, string expiryDate)
         {
             //Cheack product stock
-            var productStockRepository= new ProductStockRepository();
-            if(!productStockRepository.IsInStock(product)) throw new Exception($"{product.ToString()} not in stock");
+            if(!_productStockRepository.IsInStock(product)) throw new Exception($"{product.ToString()} not in stock");
             
             //Payment
-            var paymentProcessor= new PaymentProcessor();
-            paymentProcessor.ChargeCreditCard(creditCardNumber,expiryDate);
+            _paymentProcessor.ChargeCreditCard(creditCardNumber,expiryDate);
 
             //Ship product
-            var shippingProcessor=new ShippingProcessor();
-            shippingProcessor.MailProduct(product);
+            _shippingProcessor.MailProduct(product);
         }
     }
 }

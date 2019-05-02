@@ -2,12 +2,17 @@
 {
     using System;
     using System.Collections.Generic;
-
-    public class ProductStockRepository
+    public interface IProductStockRepository
     {
-        public static Dictionary<Product, int> ProductStockDatabase=Seed();
+        bool IsInStock(Product product);
+        void ReduceStock(Product product);
+        void AddStock(Product product);
+    }
+    public class ProductStockRepository : IProductStockRepository
+    {
+        public static Dictionary<Product, int> ProductStockDatabase = Seed();
 
-        private static  Dictionary<Product,int> Seed()
+        private static Dictionary<Product, int> Seed()
         {
             var producStockDatabase = new Dictionary<Product, int>
             {
@@ -20,7 +25,7 @@
         public bool IsInStock(Product product)
         {
             Console.WriteLine("Call Get On Database");
-            return ProductStockDatabase[product] >0;
+            return ProductStockDatabase[product] > 0;
         }
 
         public void ReduceStock(Product product)
@@ -28,11 +33,13 @@
             Console.WriteLine("Call Update On Database");
             ProductStockDatabase[product]--;
         }
-         public void AddStock(Product product)
+        public void AddStock(Product product)
         {
             Console.WriteLine("Call Update On Database");
             ProductStockDatabase[product]++;
         }
 
     }
+
+
 }
